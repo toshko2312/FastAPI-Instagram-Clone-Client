@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import Post from './post';
 
 
 const BASE_URL = 'http://localhost:8000/'
@@ -29,7 +30,15 @@ function App() {
 
 
   return (
-    'Hello world'
+    <div className='app_posts'>
+      {
+        posts.map(post => (
+          <Post
+            post={post}
+          />
+        ))
+      }
+      </div>
   );
 }
 
