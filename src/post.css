@@ -16,3 +16,14 @@
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
 }
+
+.post_text {
+    font-weight: normal;
+    padding: 20px;
+    border-bottom: 1px solid lightblue;
+}
+
+
+.post_comments {
+    padding: 20px;
+}
