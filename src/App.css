@@ -26,3 +26,9 @@
   object-fit: contain;
   width: 250px;
 }
+
+.app_signin {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}

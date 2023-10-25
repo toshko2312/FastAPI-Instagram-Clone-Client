@@ -1,16 +1,42 @@
 import React, {useState, useEffect} from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Modal, makeStyles, Input } from '@material-ui/core';
 import './App.css';
 import Post from './post';
 
 
 const BASE_URL = 'http://localhost:8000/'
 
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return{
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    position: 'absolute',
+    width: 400,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing[2, 4, 3]
+  }
+}))
+
 function App() {
+  const classes = useStyles();
 
   const [posts, setPosts] = useState([]);
   const [openSignIn, setOpenSignIn] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
+  const [modalStyle, setModalStyle] = useState(getModalStyle)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   useEffect(() => {
     fetch(BASE_URL + 'post/all')
@@ -41,9 +67,43 @@ function App() {
     })
   }, [])
 
+  const signIn = (event) => {
+
+  }
+
 
   return (
     <div className='app'>
+
+      <Modal
+        open={openSignIn}
+        onClose = {() => setOpenSignIn(false)}>
+
+          <div style={modalStyle} className={classes.paper}>
+            <form className='app_signin'>
+              <center>
+                <img className='app_headerImage'
+                  src="https://camo.githubusercontent.com/9cf795df7da35d57df8c6f17883d3c3a4cbe9611716ad62f149d08ec3de2fa59/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f647277623139637a6f2f696d6167652f75706c6f61642f76313539313437363937352f4e65775f50726f6a6563745f315f796b3234626a2e706e67"
+                  alt='Instaclone'/>
+              </center>
+              <Input
+                placeholder='username'
+                type='text'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)} />
+              <Input
+                placeholder='password'
+                type='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} />
+              <Button
+              type='submit'
+              onClick={signIn}>Login</Button>
+            </form>
+          </div>
+
+        </Modal>
+
       <div className='app_header'>
         <img className='app_headerImage'
           src="https://camo.githubusercontent.com/9cf795df7da35d57df8c6f17883d3c3a4cbe9611716ad62f149d08ec3de2fa59/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f647277623139637a6f2f696d6167652f75706c6f61642f76313539313437363937352f4e65775f50726f6a6563745f315f796b3234626a2e706e67"
