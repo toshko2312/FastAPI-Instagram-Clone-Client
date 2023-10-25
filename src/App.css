@@ -3,9 +3,26 @@
 }
 
 .app {
-  background-color: #fafafa;
+  background-color: #ecebeb;
 }
 
 .app_posts {
   padding: 20px;
+}
+
+.app_header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: rgb(232, 246, 247);
+  border-bottom: 1px solid lightgray;
+  object-fit: contain;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app_headerImage {
+  object-fit: contain;
+  width: 250px;
 }
