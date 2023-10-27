@@ -104,6 +104,13 @@ function App() {
     setOpenSignIn(false);
   }
 
+  const signOut = (event) => {
+    setAuthToken(null)
+    setAuthTokenType(null)
+    setUserId('')
+    setUsername('')
+  }
+
 
   return (
     <div className='app'>
@@ -142,10 +149,15 @@ function App() {
           src="https://camo.githubusercontent.com/9cf795df7da35d57df8c6f17883d3c3a4cbe9611716ad62f149d08ec3de2fa59/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f647277623139637a6f2f696d6167652f75706c6f61642f76313539313437363937352f4e65775f50726f6a6563745f315f796b3234626a2e706e67"
           alt='Instaclone'/>
 
-        <div>
-          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
-          <Button onClick={() => setOpenSignUp(true)}>Signup</Button>
-        </div>
+        {authToken ? (
+            <Button onClick={() => signOut()}>Logout</Button>
+          ) : (
+          <div>
+            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
+            <Button onClick={() => setOpenSignUp(true)}>Signup</Button>
+          </div>
+          )
+        }
       </div>
       <div className='app_posts'>
         {
