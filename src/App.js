@@ -40,6 +40,7 @@ function App() {
   const [authToken , setAuthToken] = useState(null)
   const [authTokenType, setAuthTokenType] = useState(null)
   const [userId, setUserId] = useState('')
+  const [email, setEmail] = useState('')
 
   function initializeAuthState() {
     const storedAuthToken = window.localStorage.getItem('authToken');
@@ -130,6 +131,10 @@ function App() {
     setUsername('')
   }
 
+  const signUp = (event) => {
+    
+  }
+
 
   return (
     <div className='app'>
@@ -158,6 +163,40 @@ function App() {
               <Button
               type='submit'
               onClick={signIn}>Login</Button>
+            </form>
+          </div>
+
+        </Modal>
+
+        <Modal
+        open={openSignUp}
+        onClose = {() => setOpenSignUp(false)}>
+
+          <div style={modalStyle} className={classes.paper}>
+            <form className='app_signin'>
+              <center>
+                <img className='app_headerImage'
+                  src="https://camo.githubusercontent.com/9cf795df7da35d57df8c6f17883d3c3a4cbe9611716ad62f149d08ec3de2fa59/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f647277623139637a6f2f696d6167652f75706c6f61642f76313539313437363937352f4e65775f50726f6a6563745f315f796b3234626a2e706e67"
+                  alt='Instaclone'/>
+              </center>
+              <Input
+                placeholder='username'
+                type='text'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)} />
+              <Input
+                placeholder='email'
+                type='text'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} />
+              <Input
+                placeholder='password'
+                type='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} />
+              <Button
+              type='submit'
+              onClick={signUp}>Sign up</Button>
             </form>
           </div>
 
