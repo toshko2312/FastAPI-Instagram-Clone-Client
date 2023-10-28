@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Button, Modal, makeStyles, Input } from '@material-ui/core';
 import './App.css';
 import Post from './post';
+import ImageUpload from './ImageUpload';
 
 
 const BASE_URL = 'http://localhost:8000/'
@@ -70,7 +71,7 @@ function App() {
     userId
      ? window.localStorage.setItem('userId', userId) 
      : window.localStorage.removeItem('userId');
-     
+
   }, [authToken, authTokenType, userId, username]);
   
 
@@ -268,6 +269,15 @@ function App() {
           ))
         }
         </div>
+
+        {
+          authToken ? (
+            <ImageUpload
+            />
+          ) : (
+            <h3>You need to login to upload</h3>
+          )
+        }
       </div>
   );
 }
