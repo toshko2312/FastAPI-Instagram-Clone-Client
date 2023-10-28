@@ -37,28 +37,41 @@ function App() {
   const [modalStyle, setModalStyle] = useState(getModalStyle)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [authToken , setAuthToken] = useState(null)
-  const [authTokenType, setAuthTokenType] = useState(null)
-  const [userId, setUserId] = useState('')
+  const [authToken, setAuthToken] = useState(null)
+  const [authTokenType, setAuthTokenType] = useState(null);
+  const [userId, setUserId] = useState('');
   const [email, setEmail] = useState('')
 
-  function initializeAuthState() {
-    const storedAuthToken = window.localStorage.getItem('authToken');
-    const storedAuthTokenType = window.localStorage.getItem('authTokenType');
-    const storedUsername = window.localStorage.getItem('username');
-    const storedUserId = window.localStorage.getItem('userId');
-  
-    if (storedAuthToken && storedAuthTokenType && storedUsername && storedUserId) {
-      setAuthToken(storedAuthToken);
-      setAuthTokenType(storedAuthTokenType);
-      setUsername(storedUsername);
-      setUserId(storedUserId);
-    }
-  }
 
   useEffect(() => {
-    initializeAuthState();
+    const storedAuthToken = window.localStorage.getItem('authToken');
+    const storedAuthTokenType = window.localStorage.getItem('authTokenType');
+    const storedUserId = window.localStorage.getItem('userId');
+    const storedUsername = window.localStorage.getItem('username');
+
+    if (storedAuthToken) {
+      setAuthToken(storedAuthToken);
+      setAuthTokenType(storedAuthTokenType);
+      setUserId(storedUserId);
+      setUsername(storedUsername);
+    }
   }, []);
+
+  useEffect(() => {
+    authToken
+      ? window.localStorage.setItem('authToken', authToken)
+      : window.localStorage.removeItem('authToken');
+    authTokenType
+      ? window.localStorage.setItem('authTokenType', authTokenType)
+      : window.localStorage.removeItem('authTokenType');
+    username
+      ? window.localStorage.setItem('username', username)
+      : window.localStorage.removeItem('username');
+    userId
+     ? window.localStorage.setItem('userId', userId) 
+     : window.localStorage.removeItem('userId');
+     
+  }, [authToken, authTokenType, userId, username]);
   
 
   useEffect(() => {
