@@ -91,7 +91,7 @@ function App() {
   }, [])
 
   const signIn = (event) => {
-    event.preventDefault();
+    event?.preventDefault();
 
     let formData = new FormData();
     formData.append('username', username)
@@ -132,7 +132,36 @@ function App() {
   }
 
   const signUp = (event) => {
-    
+    event?.preventDefault();
+
+    const json_string = JSON.stringify({
+      username: username,
+      email: email,
+      password: password
+    })
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: json_string
+    }
+
+    fetch(BASE_URL + 'user/', requestOptions)
+      .then(response => {
+        if (response.ok) {
+          return response.json
+        }
+        throw response
+      })
+      .then(data => {
+        signIn();
+      })
+      .catch(error => {
+        console.log(error);
+        alert(error);
+      })
+
+    setOpenSignIn(false)
   }
 
 
