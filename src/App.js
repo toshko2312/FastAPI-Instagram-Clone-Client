@@ -41,6 +41,25 @@ function App() {
   const [authTokenType, setAuthTokenType] = useState(null)
   const [userId, setUserId] = useState('')
 
+  function initializeAuthState() {
+    const storedAuthToken = window.localStorage.getItem('authToken');
+    const storedAuthTokenType = window.localStorage.getItem('authTokenType');
+    const storedUsername = window.localStorage.getItem('username');
+    const storedUserId = window.localStorage.getItem('userId');
+  
+    if (storedAuthToken && storedAuthTokenType && storedUsername && storedUserId) {
+      setAuthToken(storedAuthToken);
+      setAuthTokenType(storedAuthTokenType);
+      setUsername(storedUsername);
+      setUserId(storedUserId);
+    }
+  }
+
+  useEffect(() => {
+    initializeAuthState();
+  }, []);
+  
+
   useEffect(() => {
     fetch(BASE_URL + 'post/all')
     .then(response => {
